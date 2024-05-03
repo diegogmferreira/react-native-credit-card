@@ -5,6 +5,7 @@ import { styles } from './styles';
 import { CreditCard, CARD_SIDE } from '../components/credit-card';
 import { useSharedValue } from 'react-native-reanimated';
 import { Input } from '../components/input';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -33,13 +34,13 @@ export function Payment() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <CreditCard
         cardSide={cardSide}
         data={{
-          name,
+          name: name.toUpperCase(),
           number: number.replace(/(\d{4})(?=\d)/g, "$1 "),
-          date,
+          date: date.replace(/(\d{2})(?=\d)/g, "$1/"),
           code
         }}
       />
@@ -69,7 +70,9 @@ export function Payment() {
         <View style={styles.inputInLine}>
           <Input
             style={styles.smallInput}
-            placeholder='01/02'
+            placeholder='0102'
+            keyboardType='numeric'
+            maxLength={4}
             onChangeText={setDate}
             onFocus={showBackCard}
           />
@@ -78,12 +81,13 @@ export function Payment() {
             style={styles.smallInput}
             placeholder='123'
             keyboardType='numeric'
+            maxLength={3}
             onChangeText={setCode}
             onFocus={showBackCard}
           />
         </View>
       </View>
 
-    </View>
+    </SafeAreaView>
   );
 }

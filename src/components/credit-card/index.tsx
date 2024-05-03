@@ -70,11 +70,13 @@ export function CreditCard({ cardSide, data }: CreditCardProps) {
         <View style={styles.footer}>
           <View >
             <Text style={styles.label}>Validade</Text>
-            <Text style={styles.value}>{data.number}</Text>
+            <Text style={styles.value}>{data.date}</Text>
           </View>
 
-          <Text style={styles.label}>CVV</Text>
-          <Text style={styles.value}>{data.code}</Text>
+          <View>
+            <Text style={styles.label}>CVV</Text>
+            <Text style={styles.value}>{data.code}</Text>
+          </View>
         </View>
       </Animated.View>
     </View>
